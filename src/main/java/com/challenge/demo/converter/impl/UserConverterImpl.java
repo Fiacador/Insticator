@@ -24,7 +24,7 @@ public class UserConverterImpl implements UserConverter {
 		ue.setUserName(dto.getUserName());
 		ue.setUserUUID(dto.getUserUUID());
 		ue.setSite(se);
-		return null;
+		return ue;
 	}
 
 	@Override

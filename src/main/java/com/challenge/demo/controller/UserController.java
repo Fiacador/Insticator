@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +27,6 @@ public class UserController {
 	
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	@ResponseBody
 	public  ResponseEntity<UserDTO>  createUser(@RequestBody UserDTO createUser) {
 		return new ResponseEntity<>(userUsecase.createUser(createUser), HttpStatus.CREATED);
 	}
