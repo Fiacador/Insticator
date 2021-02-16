@@ -31,7 +31,7 @@ public class AnswerEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-	private UserEntity users;
+	private UserEntity user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
@@ -56,17 +56,17 @@ public class AnswerEntity implements Serializable {
 	}
 
 	/**
-	 * @return the users
+	 * @return the user
 	 */
-	public UserEntity getUsers() {
-		return users;
+	public UserEntity getUser() {
+		return user;
 	}
 
 	/**
-	 * @param users the users to set
+	 * @param user the user to set
 	 */
-	public void setUsers(UserEntity users) {
-		this.users = users;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class AnswerEntity implements Serializable {
 		result = prime * result + ((answerId == null) ? 0 : answerId.hashCode());
 		result = prime * result + ((questions == null) ? 0 : questions.hashCode());
 		result = prime * result + ((questionsAnswer == null) ? 0 : questionsAnswer.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -132,10 +132,10 @@ public class AnswerEntity implements Serializable {
 				return false;
 		} else if (!questionsAnswer.equals(other.questionsAnswer))
 			return false;
-		if (users == null) {
-			if (other.users != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!users.equals(other.users))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
