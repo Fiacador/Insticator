@@ -23,19 +23,26 @@ import com.challenge.demo.usecase.QuestionUsecase;
 @RequestMapping("/questions")
 public class QuestionController {
 
-	
 	@Autowired
 	QuestionUsecase usecase;
 
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<QuestionDTO> createQuestion(@RequestBody QuestionDTO incomingQuestion) {
-		return new ResponseEntity<QuestionDTO>(usecase.createQuestion(incomingQuestion), HttpStatus.OK);
+		try {
+			return new ResponseEntity<QuestionDTO>(usecase.createQuestion(incomingQuestion), HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping()
 	public ResponseEntity<List<QuestionDTO>> getSites() {
-		return new ResponseEntity<List<QuestionDTO>>(usecase.getSites(), HttpStatus.OK);
+		try {
+			return new ResponseEntity<List<QuestionDTO>>(usecase.getSites(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
 	}
 
@@ -43,40 +50,51 @@ public class QuestionController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<QuestionDTO> updateQuestion(@RequestBody QuestionDTO incomingQuestion,
 			@PathVariable(value = "id") Long questionId) {
-		return new ResponseEntity<QuestionDTO>(usecase.updateQuestion(questionId, incomingQuestion), HttpStatus.OK);
+		try {
+			return new ResponseEntity<QuestionDTO>(usecase.updateQuestion(questionId, incomingQuestion), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<QuestionDTO> deleteQuestion(@PathVariable(value = "id") Long questionId) {
-		return new ResponseEntity<QuestionDTO>(usecase.delete(questionId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<QuestionDTO>(usecase.delete(questionId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<QuestionDTO> getQuestionById(@PathVariable(value = "id") Long questionId) {
-		return new ResponseEntity<QuestionDTO>(usecase.getQuestionById(questionId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<QuestionDTO>(usecase.getQuestionById(questionId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping("/{id}/answers")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<QuestionAnswerDTO> createQuestionAnswers(@PathVariable(value = "id") Long questionId,
 			@RequestBody QuestionAnswerDTO newQADto) {
-		return new ResponseEntity<QuestionAnswerDTO>(usecase.createQuestionAnswers(questionId, newQADto),
-				HttpStatus.CREATED);
-	}
-	
-	@PostMapping("/{id}/answersmultiplechoice")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<QuestionAnswerDTO> createQuestionAnswersMultipleChoice(@PathVariable(value = "id") Long questionId,
-			@RequestBody List<QuestionAnswerDTO> newQADto) {
-		return new ResponseEntity<QuestionAnswerDTO>(usecase.createQuestionAnswersMultipleChoice(questionId, newQADto),
-				HttpStatus.CREATED);
+		try {
+			return new ResponseEntity<QuestionAnswerDTO>(usecase.createQuestionAnswers(questionId, newQADto),
+					HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping("/{id}/answers")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<QuestionAnswerDTO>> getQuestionAnswers(@PathVariable(value = "id") Long questionId) {
-
-		return new ResponseEntity<List<QuestionAnswerDTO>>(usecase.getQuestionAnswers(questionId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<List<QuestionAnswerDTO>>(usecase.getQuestionAnswers(questionId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
 	}
 }

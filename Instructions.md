@@ -56,35 +56,63 @@ production ready upgrade solution.
 
 Set the JDBC URL to *jdbc:h2:mem:testdb*, and press connect
 
-#### Creating a Sample Trivia Question
+#### Creating Appendix
 Create a Site
->curl --header "Content-Type: application/json" \
+curl --header "Content-Type: application/json" \
   	 --request POST \
   	 --data '{"url": "www.bob.com"}' \
   	 http://localhost:8080/sites
-
-Create the Trivia Question for the Site
->curl --header "Content-Type: application/json" \
+curl --header "Content-Type: application/json" \
   	 --request POST \
-  	 --data '{"siteId":1, "question": "how many toes does a pig have?"}' \
+  	 --data '{"siteId":1,"question":"Please tell us a bit about yourself? ","maxQuestionAnswer":4,"maxResponseAnswer":1,"isExact":false}' \
   	 http://localhost:8080/questions
 
-Create some responses for the question
->curl --header "Content-Type: application/json" \
+curl --header "Content-Type: application/json" \
   	 --request POST \
-  	 --data '{"answer": "4 toes","isCorrectAnswer": true}' \
-  	 http://localhost:8080/questions/2/answers
-  	 
->curl --header "Content-Type: application/json" \
+  	 --data '{"answer":" < 18 ","isCorrectAnswer":false,"direction":"HORIZONTAL","maxQuestionAnswer": 3}' \
+  	 http://localhost:8080/questions/1/answers
+
+curl --header "Content-Type: application/json" \
   	 --request POST \
-  	 --data '{"answer": "3 toes","isCorrectAnswer": false}' \
-  	 http://localhost:8080/questions/2/answers
-  	 
->curl --header "Content-Type: application/json" \
- 	 --request POST \
- 	 --data '{"answer": "The do not have toes silly","isCorrectAnswer": false}' \
- 	 http://localhost:8080/questions/2/answers
- 	 
+  	 --data '{"answer":"  18 to 35 ","isCorrectAnswer":false,"direction":"HORIZONTAL","maxQuestionAnswer": 3}' \
+  	 http://localhost:8080/questions/1/answers
+
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"answer":" 35 to 55 ","isCorrectAnswer":false,"direction":"HORIZONTAL","maxQuestionAnswer": 3}' \
+  	 http://localhost:8080/questions/1/answers
+
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"answer":" > 55 ","isCorrectAnswer":false,"direction":"HORIZONTAL","maxQuestionAnswer": 3}' \
+  	 http://localhost:8080/questions/1/answers
+
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"answer":"Male","isCorrectAnswer":false,"direction":"VERTICAL"}' \
+  	 http://localhost:8080/questions/1/answers
+
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"answer":"Female","isCorrectAnswer":false,"direction":"VERTICAL"}' \
+  	 http://localhost:8080/questions/1/answers
+     
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"answer":"Other","isCorrectAnswer":false,"direction":"VERTICAL"}' \
+  	 http://localhost:8080/questions/1/answers
+     
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"userName":"Jonh Jones","siteId":1}' \
+  	 http://localhost:8080/users
+     
+     
+     
+curl --header "Content-Type: application/json" \
+  	 --request POST \
+  	 --data '{"userId":1,"answers":{"2":[3,1]}}' \
+  	 http://localhost:8080/answers  
 ## Example Questions
 Questions show some different types questions that exist
 

@@ -23,12 +23,13 @@ public class SiteConverterImpl implements SiteConverter{
 	@Override
 	public SiteDTO entityToDto(SiteEntity entity) {
 		SiteDTO dto = new SiteDTO();
+		dto.setSiteId(entity.getSiteId());
 		dto.setCreatedAt(entity.getCreatedAt());
 		dto.setSiteUUID(entity.getSiteUUID());
 		dto.setUrl(entity.getUrl());
 		dto.setUpdatedAt(entity.getUpdatedAt());
 		dto.setUrl(entity.getUrl());
-		return null;
+		return dto;
 	}
 
 	@Override

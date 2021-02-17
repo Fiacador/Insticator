@@ -30,30 +30,50 @@ public class SiteController {
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public  ResponseEntity<SiteDTO>  createSite(@RequestBody SiteDTO createSite) {
+	public  ResponseEntity<SiteDTO>  createSite(@RequestBody SiteDTO createSite)  {
 		
-		return new ResponseEntity<>(siteUsecase.createSite(createSite), HttpStatus.CREATED);
+		try {
+			return new ResponseEntity<SiteDTO>(siteUsecase.createSite(createSite), HttpStatus.CREATED);
+		}  catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping()
 	public ResponseEntity<List<SiteDTO>> getSites() {
-		return new ResponseEntity<>(siteUsecase.getSites(), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(siteUsecase.getSites(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<SiteDTO> updateSite(@RequestBody SiteDTO updatedSite, @PathVariable(value = "id") Long siteId) {
-		return new ResponseEntity<>(siteUsecase.updateSite(updatedSite, siteId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(siteUsecase.updateSite(updatedSite, siteId), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<SiteDTO> deleteSite(@PathVariable(value = "id") Long siteId) {
-		return new ResponseEntity<>(siteUsecase.deleteSite(siteId), HttpStatus.OK); 
+		try {
+			return new ResponseEntity<>(siteUsecase.deleteSite(siteId), HttpStatus.OK);
+		}  catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<SiteDTO> getSiteById(@PathVariable(value = "id") Long siteId) {
-		return new ResponseEntity<>(siteUsecase.getSiteById(siteId), HttpStatus.OK); 
+		try {
+			return new ResponseEntity<>(siteUsecase.getSiteById(siteId), HttpStatus.OK);
+		}  catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 

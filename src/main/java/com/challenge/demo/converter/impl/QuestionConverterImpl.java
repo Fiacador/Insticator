@@ -3,16 +3,20 @@ package com.challenge.demo.converter.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.challenge.demo.converter.QuestionConverter;
+import com.challenge.demo.converter.SiteConverter;
 import com.challenge.demo.dto.QuestionDTO;
 import com.challenge.demo.entity.QuestionEntity;
 import com.challenge.demo.entity.SiteEntity;
 
 @Component
 public class QuestionConverterImpl implements QuestionConverter{
-
+	@Autowired
+	private SiteConverter siteConverter;
+	
 	@Override
 	public QuestionDTO entityToDto(QuestionEntity entity) {
 		QuestionDTO obj = new QuestionDTO();
@@ -21,6 +25,10 @@ public class QuestionConverterImpl implements QuestionConverter{
 		obj.setQuestion(entity.getQuestion());
 		obj.setUpdatedAt(entity.getUpdatedAt());
 		obj.setCreatedAt(entity.getCreatedAt());
+		obj.setMaxQuestionAnswer(entity.getMaxQuestionAnswer());
+		obj.setMaxResponseAnswer(entity.getMaxResponseAnswer());
+		obj.setIsExact(entity.getIsExact());
+		obj.setSite(siteConverter.entityToDto(entity.getSite()));
 		return obj;
 	}
 

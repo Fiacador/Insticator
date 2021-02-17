@@ -4,23 +4,23 @@ import java.util.List;
 
 import com.challenge.demo.dto.QuestionAnswerDTO;
 import com.challenge.demo.dto.QuestionDTO;
+import com.challenge.demo.exception.QuestionException;
 
 public interface QuestionUsecase {
 	
-	QuestionDTO createQuestion(QuestionDTO question);
+	QuestionDTO createQuestion(QuestionDTO question) throws QuestionException;
 	
-	List<QuestionDTO> getSites();
+	List<QuestionDTO> getSites() throws QuestionException;
 	
-	QuestionDTO updateQuestion(Long id, QuestionDTO question);
+	QuestionDTO updateQuestion(Long id, QuestionDTO question) throws QuestionException;
 
-	QuestionDTO delete(Long questionId);
+	QuestionDTO delete(Long questionId) throws QuestionException;
 	
-	QuestionDTO getQuestionById(Long questionId);
+	QuestionDTO getQuestionById(Long questionId) throws QuestionException;
 	
-	QuestionAnswerDTO createQuestionAnswers(Long questionId, QuestionAnswerDTO newQADto);
+	QuestionAnswerDTO createQuestionAnswers(Long questionId, QuestionAnswerDTO newQADto) throws QuestionException;
 	
-	List<QuestionAnswerDTO> getQuestionAnswers(Long questionId);
+	List<QuestionAnswerDTO> getQuestionAnswers(Long questionId) throws QuestionException;
 
-	QuestionAnswerDTO createQuestionAnswersMultipleChoice(Long questionId, List<QuestionAnswerDTO> newQADto);
 
 }

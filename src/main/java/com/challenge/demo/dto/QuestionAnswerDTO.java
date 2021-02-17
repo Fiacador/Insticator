@@ -25,36 +25,6 @@ public class QuestionAnswerDTO {
 
 	private Integer maxQuestionAnswer;
 
-	public static QuestionAnswerEntity transform(final QuestionAnswerDTO newQADto, final QuestionEntity question) {
-		final QuestionAnswerEntity newQa = new QuestionAnswerEntity();
-		newQa.setAnswer(newQADto.getAnswer());
-		newQa.setIsCorrectAnswer(newQADto.getIsCorrectAnswer());
-		newQa.setQuestion(question);
-
-		return newQa;
-	}
-
-	public static QuestionAnswerDTO build(final QuestionAnswerEntity save) {
-		final QuestionAnswerDTO newQaDto = new QuestionAnswerDTO();
-
-		newQaDto.setId(save.getId());
-		newQaDto.setAnswer(save.getAnswer());
-		newQaDto.setIsCorrectAnswer(save.isCorrectAnswer());
-		newQaDto.setCreatedAt(save.getCreatedAt());
-		newQaDto.setUpdatedAt(save.getUpdatedAt());
-		newQaDto.setQuestionId(save.getQuestion().getQuestionId());
-
-		return newQaDto;
-	}
-
-	public static List<QuestionAnswerDTO> build(final List<QuestionAnswerEntity> answers) {
-		final List<QuestionAnswerDTO> ret = new ArrayList<>();
-		for (QuestionAnswerEntity qa : answers) {
-			ret.add(build(qa));
-		}
-		return ret;
-	}
-
 	public Long getId() {
 		return id;
 	}

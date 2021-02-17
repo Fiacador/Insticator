@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.challenge.demo.converter.SiteConverter;
 import com.challenge.demo.dto.SiteDTO;
+import com.challenge.demo.exception.SiteException;
 import com.challenge.demo.repository.SiteRepository;
 import com.challenge.demo.usecase.SiteUsecase;
 
@@ -21,13 +22,13 @@ public class SiteUsecaseImpl implements SiteUsecase{
 	@Autowired
 	SiteConverter siteConverter;
 	
-	public SiteDTO createSite( SiteDTO createSite) {
+	public SiteDTO createSite( SiteDTO createSite) throws SiteException{
 		createSite.setSiteUUID(UUID.randomUUID());
 		return siteConverter.entityToDto(siteRepository.save(siteConverter.dtoToEntity(createSite)));
 	}
 	
 	@Override
-	public List<SiteDTO> getSites() {
+	public List<SiteDTO> getSites() throws SiteException{
 		return Optional
 		.ofNullable(siteRepository.findAll())
 		.map(sites -> siteConverter.entityToDto(sites))
@@ -37,7 +38,7 @@ public class SiteUsecaseImpl implements SiteUsecase{
 	}
 
 	@Override
-	public SiteDTO updateSite(SiteDTO updatedSite, Long siteId) {
+	public SiteDTO updateSite(SiteDTO updatedSite, Long siteId)  throws SiteException{
 		return siteRepository
 				.findById(siteId)
 				.map(site -> {
@@ -48,7 +49,7 @@ public class SiteUsecaseImpl implements SiteUsecase{
 	}
 
 	@Override
-	public SiteDTO deleteSite(Long siteId) {
+	public SiteDTO deleteSite(Long siteId)  throws SiteException{
 		return siteRepository
 				.findById(siteId)
 				.map(site -> {
@@ -59,7 +60,7 @@ public class SiteUsecaseImpl implements SiteUsecase{
 	}
 
 	@Override
-	public SiteDTO getSiteById(Long siteId) {
+	public SiteDTO getSiteById(Long siteId) throws SiteException{
 		return siteRepository
 				.findById(siteId)
 				.map(site -> siteConverter.entityToDto(site))

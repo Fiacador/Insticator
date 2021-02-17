@@ -42,7 +42,7 @@ public class QuestionEntity implements Serializable {
 	@Column(name = "question_id")
 	private Long questionId;
 
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "site_id", referencedColumnName = "site_id")
 	private SiteEntity site;
 	
@@ -53,7 +53,7 @@ public class QuestionEntity implements Serializable {
 	private Integer maxResponseAnswer;
 	
 	@Column(nullable = false, columnDefinition = "TINYINT(1)")
-	private Boolean isExact;
+	private Boolean isExact = false;
 	
 	@Column(name = "parent_id")
 	private Long parentId;
@@ -65,7 +65,7 @@ public class QuestionEntity implements Serializable {
 	@Length(min = 0, max = 250)
 	private String question;
 
-	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
 	private List<QuestionAnswerEntity> answers = new ArrayList<>();
 
 	@Column(nullable = false, updatable = false)
